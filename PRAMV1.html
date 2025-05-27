@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-
+scale=1.0">
+<meta name="apple-mobile-web-
+app-capable" content="yes">
+<meta name="apple-mobile-web-
+app-status-bar-style"
+content="black">
+<title>Cabin Announcement
+Selector - PRAM-System</title>
+<link rel="manifest"
+href="manifest.json">
+<link rel="apple-touch-icon"
+href="icon.png">
+<style>
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 20px;
+background-color: #f0f0f0;
+}
+.container {
+display: flex;
+justify-content: space-
+between;
+gap: 20px;
+}
+.section {
+background: white;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 2px 5px
+rgba(0,0,0,0.1);
+width: 45%;
+}
+.checkbox-list {
+max-height: 300px;
+overflow-y: auto;
+margin-bottom: 20px;
+}
+.checkbox-list label {
+display: block;
+margin: 5px 0;
+}
+button {
+padding: 10px 20px;
+background-color: #007bff;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+button:hover {
+background-color: #0056b3;
+}
+table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 20px;
+}
+th, td {
+border: 1px solid #ddd;
+padding: 8px;
+text-align: left;
+}
+th {
+background-color: #007bff;
+color: white;
+}
+@media (max-width: 768px) {
+.container {
+flex-direction: column;
+}
+.section {
+width: 100%;
+}
+}
+</style>
+</head>
+<body>
+<h1>Cabin Announcement Selector
+- PRAM-System</h1>
+<div class="container">
+<div class="section">
+<h2>Announcements</h2>
+<div class="checkbox-list">
+<label><input
+type="checkbox" id="select-all-
+announcements"> Select All
+Announcements</label>
+<label><input
+type="checkbox"
+name="announcement"
+value="SAFETY
+_DEMO"> Safety
+Demo</label>
+<label><input
+type="checkbox"
+name="announcement"
+value="DISEMBARKATION">
+Disembarkation</label>
+<label><input
+type="checkbox"
+name="announcement"
+value="BOARDING
+PILOT
+MUSIC">
+_
+_
+Boarding - Pilot w/ music</label>
+<label><input
+type="checkbox"
+name="announcement"
+value="BOARDING
+_REM"> Boarding -
+Rem</label>
+<label><input
+type="checkbox"
+name="announcement"
+value="OTS
+_OPEN"> OTS Open</
+label>
+<label><input
+type="checkbox"
+name="announcement"
+value="OTS
+_CLOSED"> OTS Closed</
+label>
+<label><input
+type="checkbox"
+name="announcement"
+value="DUTYFREE"> Duty Free</
+label>
+<label><input
+type="checkbox"
+name="announcement"
+value="GIFTS"> Gifts</label>
+<label><input
+type="checkbox"
+name="announcement"
+value="LANDED
+NOT
+ON
+TIME">
+_
+_
+_
+Landed Not On Time</label>
+<label><input
+type="checkbox"
+name="announcement"
+value="LANDED
+ON
+TIME
+BUGLE">
+_
+_
+_
+Landed On Time Bugle</label>
+<label><input
+type="checkbox"
+name="announcement"
+value="ONBOARD
+SERVICE">
+_
+Onboard Service</label>
+<label><input
+type="checkbox"
+name="announcement"
+value="SCRATCHCARDS">
+Scratchcards</label>
+</div>
+<h2>Languages</h2>
+<div class="checkbox-list">
+<label><input
+type="checkbox" id="select-all-
+languages"> Select All Languages</
+label>
+<label><input
+type="checkbox" name="language"
+value="English"> English</label>
+<label><input
+type="checkbox" name="language"
+value="Italian"> Italian</label>
+<label><input
+type="checkbox" name="language"
+value="Spanish"> Spanish</label>
+<label><input
+type="checkbox" name="language"
+value="German"> German</label>
+<label><input
+type="checkbox" name="language"
+value="French"> French</label>
+<!-- Add more languages as
+needed -->
+</div>
+<button
+onclick="generateTable()">Generate
+Table</button>
+<button
+onclick="resetSelections()">Reset All
+Selections</button>
+</div>
+<div class="section" id="results-
+section">
+<h2>Results</h2>
+<div id="results">
+<p>Selected
+announcements: <span
+id="announcement-count">0</
+span></p>
+<p>Selected languages:
+<span id="language-count">0</
+span></p>
+<p>Total items: <span
+id="total-items">0</span></p>
+<table id="results-table">
+<thead>
+<tr>
+<th>Announcement</
+th>
+<th>English</th>
+<th>Italian</th>
+<th>Spanish</th>
+</tr>
+</thead>
+<tbody id="results-table-
+body"></tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Settings will be saved
+automatically</p>
+<script>
+// Data for PRAM codes (based on
+your screenshot)
+const pramData = {
+"OTS
+_OPEN": { "English": "No.
+49 (00:28)", "Italian": "No. 251
+(00:39)", "Spanish": "No. 385
+(00:42)" },
+"OTS
+_CLOSED": { "English":
+"No. 50 (00:15)", "Italian": "No. 252
+(00:22)", "Spanish": "No. 386
+(00:22)" },
+"GIFTS": { "English": "No. 52
+(00:18)", "Italian": "No. 254 (00:27)",
+"Spanish": "No. 388 (00:31)" },
+"ONBOARD
+SERVICE":
+_
+{ "English": "No. 55 (00:30)", "Italian":
+"No. 257 (00:37)", "Spanish": "No. 391
+(00:41)" }
+// Add more announcements
+and their codes as needed
+};
+// Select All functionality
+document.getElementById('select-all-
+announcements').addEventListener('c
+hange', function() {
+const checkboxes =
+document.querySelectorAll('input[nam
+e="announcement"]');
+checkboxes.forEach(checkbox
+=> checkbox.checked = this.checked);
+updateCounts();
+});
+document.getElementById('select-all-
+languages').addEventListener('change
+', function() {
+const checkboxes =
+document.querySelectorAll('input[nam
+e="language"]');
+checkboxes.forEach(checkbox
+=> checkbox.checked = this.checked);
+updateCounts();
+});
+// Update counts of selected
+items
+function updateCounts() {
+const selectedAnnouncements
+=
+document.querySelectorAll('input[nam
+e="announcement"]:checked').length;
+const selectedLanguages =
+document.querySelectorAll('input[nam
+e="language"]:checked').length;
+document.getElementById('announce-
+ment-count').textContent =
+selectedAnnouncements;
+document.getElementById('language-
+count').textContent =
+selectedLanguages;
+document.getElementById('total-
+items').textContent =
+selectedAnnouncements *
+selectedLanguages;
+}
+// Generate the results table
+function generateTable() {
+const selectedAnnouncements
+=
+Array.from(document.querySelectorAll
+('input[name="announcement"]:chec-
+ked')).map(input => input.value);
+const selectedLanguages =
+Array.from(document.querySelectorAll
+('input[name="language"]:checked')).
+map(input => input.value);
+const tbody =
+document.getElementById('results-
+table-body');
+tbody.innerHTML = '';
+selectedAnnouncements.forEach(an-
+nouncement => {
+if
+(pramData[announcement]) {
+const row =
+document.createElement('tr');
+row.innerHTML = `<td>$
+{announcement.replace('_', ' ')}</td>
+<td>$
+{selectedLanguages.includes('English'
+) ? pramData[announcement].English ||
+'-' : '-'}</td>
+<td>$
+{selectedLanguages.includes('Italian')
+? pramData[announcement].Italian ||
+'-' : '-'}</td>
+<td>$
+{selectedLanguages.includes('Spanish
+') ? pramData[announcement].Spanish
+|| '-' : '-'}</td>`;
+tbody.appendChild(row);
+}
+});
+updateCounts();
+}
+// Reset selections
+function resetSelections() {
+document.querySelectorAll('input[type
+="checkbox"]').forEach(checkbox =>
+checkbox.checked = false);
+document.getElementById('results-
+table-body').innerHTML = '';
+updateCounts();
+}
+// Add touch support for iOS
+document.querySelectorAll('button,
+input').forEach(element => {
+element.addEventListener('touchstart'
+, function(e) {
+e.preventDefault();
+this.click();
+});
+});
+// Service Worker registration for
+PWA
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('sw.js
+').then(reg => {
+console.log('Service Worker
+registered', reg);
+}).catch(err => {
+console.log('Service Worker
+registration failed', err);
+});
+}
+// Update counts on checkbox
+change
+document.querySelectorAll('input[nam
+e="announcement"],
+input[name="language"]').forEach(che
+ckbox => {
+checkbox.addEventListener('change',
+updateCounts);
+});
+</script>
+</body>
+</html>
