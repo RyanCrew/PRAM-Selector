@@ -1,0 +1,681 @@
+{
+	"pages": [
+	{
+		"width":"246",
+		"height":"772",
+		"num":"1",
+		"dir":"ltr",
+		"orient":"portrait",
+		"columns": [
+		{
+			"paragraphs": [
+			{
+				"lines": [
+				{
+					"words": [					{
+						"text":"{",
+						"width":"4.58",
+						"height":"10.35",
+						"left":"13",
+						"top":"749.68",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"neutral",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"\"name\":",
+						"width":"45.94",
+						"height":"11.35",
+						"left":"26.5",
+						"top":"731.36",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"\"Cabin",
+						"width":"38.26",
+						"height":"11.35",
+						"left":"75.82",
+						"top":"731.36",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"Announcement",
+						"width":"85.38",
+						"height":"11.35",
+						"left":"117.46",
+						"top":"731.36",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				}]
+			},
+			{
+				"lines": [
+				{
+					"words": [					{
+						"text":"Selector\",",
+						"width":"55.35",
+						"height":"11.35",
+						"left":"13",
+						"top":"713.04",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"\"short_name\":",
+						"width":"82.43",
+						"height":"11.35",
+						"left":"26.5",
+						"top":"694.72",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"\"PRAM",
+						"width":"39.77",
+						"height":"11.35",
+						"left":"112.3",
+						"top":"694.72",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"Selector\",",
+						"width":"55.34",
+						"height":"11.35",
+						"left":"155.44",
+						"top":"694.72",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"\"description\":",
+						"width":"78.52",
+						"height":"11.35",
+						"left":"26.5",
+						"top":"676.4",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"\"Select",
+						"width":"41.31",
+						"height":"11.35",
+						"left":"108.4",
+						"top":"676.4",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"cabin",
+						"width":"30.66",
+						"height":"11.35",
+						"left":"153.09",
+						"top":"676.4",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				}]
+			},
+			{
+				"lines": [
+				{
+					"words": [					{
+						"text":"announcements",
+						"width":"90.14",
+						"height":"11.35",
+						"left":"13",
+						"top":"658.08",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"and",
+						"width":"21",
+						"height":"11.35",
+						"left":"106.53",
+						"top":"658.08",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"languages",
+						"width":"58.06",
+						"height":"11.35",
+						"left":"130.92",
+						"top":"658.08",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"for",
+						"width":"15.74",
+						"height":"11.35",
+						"left":"192.37",
+						"top":"658.08",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"Ryanair",
+						"width":"41.9",
+						"height":"11.35",
+						"left":"13",
+						"top":"639.76",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"PRAM",
+						"width":"34.03",
+						"height":"11.35",
+						"left":"58.28",
+						"top":"639.76",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"system\",",
+						"width":"48.42",
+						"height":"11.35",
+						"left":"95.69",
+						"top":"639.76",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				}]
+			},
+			{
+				"lines": [
+				{
+					"words": [					{
+						"text":"\"start_url\":",
+						"width":"62.65",
+						"height":"11.35",
+						"left":"26.5",
+						"top":"621.44",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"\"./Pramv1.html\",",
+						"width":"89.75",
+						"height":"11.35",
+						"left":"92.52",
+						"top":"621.44",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"\"display\":",
+						"width":"54.91",
+						"height":"11.35",
+						"left":"26.5",
+						"top":"603.12",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"\"standalone\",",
+						"width":"76.09",
+						"height":"11.35",
+						"left":"84.78",
+						"top":"603.12",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"\"background_color\":",
+						"width":"117.27",
+						"height":"11.35",
+						"left":"26.5",
+						"top":"584.8",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"\"#f0f0f0\",",
+						"width":"56.98",
+						"height":"11.35",
+						"left":"147.14",
+						"top":"584.8",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"\"theme_color\":",
+						"width":"85.5",
+						"height":"11.35",
+						"left":"26.5",
+						"top":"566.48",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"\"#007bff\",",
+						"width":"59.23",
+						"height":"11.35",
+						"left":"115.38",
+						"top":"566.48",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"\"icons\":",
+						"width":"45.06",
+						"height":"11.35",
+						"left":"26.5",
+						"top":"548.16",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"[",
+						"width":"4.59",
+						"height":"11.35",
+						"left":"74.94",
+						"top":"548.16",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"neutral",
+						"angle":"0"
+					}]
+				}]
+			},
+			{
+				"lines": [
+				{
+					"words": [					{
+						"text":"{",
+						"width":"4.59",
+						"height":"10.35",
+						"left":"40",
+						"top":"529.84",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"neutral",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"\"src\":",
+						"width":"32.4",
+						"height":"11.35",
+						"left":"53.51",
+						"top":"511.52",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"\"icon.png\",",
+						"width":"62.87",
+						"height":"11.35",
+						"left":"89.29",
+						"top":"511.52",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"\"sizes\":",
+						"width":"43.69",
+						"height":"11.35",
+						"left":"53.51",
+						"top":"493.2",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"\"192x192\",",
+						"width":"61.09",
+						"height":"11.35",
+						"left":"100.58",
+						"top":"493.2",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"\"type\":",
+						"width":"40.08",
+						"height":"11.35",
+						"left":"53.51",
+						"top":"474.88",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"\"image/png\"",
+						"width":"70.96",
+						"height":"11.35",
+						"left":"96.96",
+						"top":"474.88",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				}]
+			},
+			{
+				"lines": [
+				{
+					"words": [					{
+						"text":"},",
+						"width":"8.14",
+						"height":"10.35",
+						"left":"40",
+						"top":"456.56",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"neutral",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"{",
+						"width":"4.59",
+						"height":"10.35",
+						"left":"40",
+						"top":"438.24",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"neutral",
+						"angle":"0"
+					}]
+				}]
+			},
+			{
+				"lines": [
+				{
+					"words": [					{
+						"text":"\"src\":",
+						"width":"32.4",
+						"height":"11.35",
+						"left":"53.51",
+						"top":"419.92",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"\"icon.png\",",
+						"width":"62.87",
+						"height":"11.35",
+						"left":"89.29",
+						"top":"419.92",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"\"sizes\":",
+						"width":"43.69",
+						"height":"11.35",
+						"left":"53.51",
+						"top":"401.6",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"\"512x512\",",
+						"width":"60.66",
+						"height":"11.35",
+						"left":"100.58",
+						"top":"401.6",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"\"type\":",
+						"width":"40.08",
+						"height":"11.35",
+						"left":"53.51",
+						"top":"383.28",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					},
+					{
+						"text":"\"image/png\"",
+						"width":"70.96",
+						"height":"11.35",
+						"left":"96.96",
+						"top":"383.28",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"ltr",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"}",
+						"width":"4.59",
+						"height":"10.35",
+						"left":"40",
+						"top":"364.96",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"neutral",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"]",
+						"width":"4.59",
+						"height":"11.35",
+						"left":"26.5",
+						"top":"346.64",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"neutral",
+						"angle":"0"
+					}]
+				},
+				{
+					"words": [					{
+						"text":"}",
+						"width":"4.58",
+						"height":"10.35",
+						"left":"13",
+						"top":"328.32",
+						"color":"#454545",
+						"fontName":"Times New Roman",
+						"fontSize":"12",
+						"underline":"0",
+						"dir":"neutral",
+						"angle":"0"
+					}]
+				}]
+			}]
+		}]
+	}]
+}
