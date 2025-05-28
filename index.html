@@ -310,15 +310,27 @@
             const selectedLanguages = Array.from(document.querySelectorAll('input[name="language"]:checked')).map(input => input.value);
             const thead = document.getElementById('results-table-head');
             const tbody = document.getElementById('results-table-body');
+
+            // Reiniciar la tabla
             thead.innerHTML = '<tr><th>Announcement</th></tr>';
             tbody.innerHTML = '';
 
-            // Crear columnas dinámicas para los idiomas seleccionados
-            const languagesToShow = selectedLanguages.includes('English') 
-                ? selectedLanguages 
-                : ['English', ...selectedLanguages]; // Asegurarse de que English siempre esté presente
+            // Determinar los idiomas a mostrar
+            let languagesToShow = [];
+            if (selectedLanguages.length === 0) {
+                languagesToShow = ['English']; // Por defecto, solo inglés si no se selecciona nada
+            } else {
+                // Asegurarse de que el inglés esté siempre presente, y añadir los idiomas seleccionados
+                languagesToShow = ['English'];
+                selectedLanguages.forEach(lang => {
+                    if (lang !== 'English' && !languagesToShow.includes(lang)) {
+                        languagesToShow.push(lang);
+                    }
+                });
+            }
+
+            // Crear las columnas de la tabla
             languagesToShow.forEach(lang => {
-                if (!selectedLanguages.includes(lang) && lang !== 'English') return; // Mostrar solo los seleccionados + English
                 const th = document.createElement('th');
                 th.textContent = lang;
                 thead.querySelector('tr').appendChild(th);
@@ -330,7 +342,6 @@
                     const row = document.createElement('tr');
                     let cells = `<td>${announcement.replace('_', ' ')}</td>`;
                     languagesToShow.forEach(lang => {
-                        if (!selectedLanguages.includes(lang) && lang !== 'English') return;
                         cells += `<td>${pramData[announcement][lang] || '-'}</td>`;
                     });
                     row.innerHTML = cells;
