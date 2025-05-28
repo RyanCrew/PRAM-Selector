@@ -2,25 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>Cabin Announcement Selector - PRAM-System</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
     <link rel="icon" href="icon.png" type="image/png">
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
             color: #333;
         }
         h1 {
             text-align: center;
-            color: #01579b;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
         .container {
             display: flex;
@@ -55,19 +56,19 @@
             color: #424242;
         }
         button {
-            padding: 12px 24px;
-            background: linear-gradient(45deg, #0288d1, #0277bd);
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #f39c12, #e67e22);
             color: white;
             border: none;
             border-radius: 25px;
             cursor: pointer;
-            margin-right: 10px;
-            font-size: 16px;
+            margin: 10px;
+            font-size: 18px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             transition: background 0.3s;
         }
         button:hover {
-            background: linear-gradient(45deg, #0277bd, #01579b);
+            background: linear-gradient(45deg, #e67e22, #d35400);
         }
         table {
             width: 100%;
@@ -99,8 +100,11 @@
         tr:last-child td {
             border-bottom: none;
         }
+        tr {
+            transition: background 0.3s ease;
+        }
         tr:hover td {
-            background: #e1f5fe;
+            background: #bee3f8;
         }
         p {
             font-size: 16px;
@@ -108,22 +112,47 @@
             text-align: center;
             margin-top: 20px;
         }
+        #language-search {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        #notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2ecc71;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
             }
             .section {
                 width: 100%;
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .checkbox-list {
+                padding: 15px;
             }
             button {
-                width: 100%;
-                margin-bottom: 10px;
+                width: calc(100% - 20px);
+                margin: 10px;
             }
         }
     </style>
 </head>
 <body>
     <h1>Cabin Announcement Selector - PRAM-System</h1>
+    <div id="notification"></div>
     <div class="container">
         <div class="section">
             <h2>Announcements</h2>
@@ -144,6 +173,7 @@
             </div>
 
             <h2>Languages</h2>
+            <input type="text" id="language-search" placeholder="Search languages...">
             <div class="checkbox-list" id="languages">
                 <label><input type="checkbox" id="select-all-languages"> Select All Languages</label>
                 <label><input type="checkbox" name="language" value="English"> English</label>
@@ -174,6 +204,7 @@
             </div>
 
             <button onclick="generateTable()">Generate Table</button>
+            <button onclick="exportToCSV()">Export to CSV</button>
             <button onclick="resetSelections()">Reset All Selections</button>
         </div>
 
@@ -186,7 +217,7 @@
                 <table id="results-table">
                     <thead id="results-table-head">
                         <tr>
-                            <th>Announcement</th>
+                            <th>Records</th>
                             <!-- Las columnas de idiomas se generarán dinámicamente -->
                         </tr>
                     </thead>
@@ -200,67 +231,6 @@
 
     <script>
         const pramData = {
-            "BOARDING": {
-                "English": "No. 46,47,48 (00:32,00:32,00:28)",
-                "Arabic": "No. 64,65,66 (00:54,00:53,00:44)",
-                "Bulgarian": "No. 80,81,82 (00:47,00:46,00:36)",
-                "Catalan": "No. 96,97,98 (00:49,00:48,00:34)",
-                "Croatian": "No. 112,113,114 (00:50,00:50,00:40)",
-                "Czech": "No. 128,129,130 (00:53,00:52,00:36)",
-                "Danish": "No. 144,145,146 (00:29,00:38,00:29)",
-                "Dutch": "No. 160,161,162 (00:49,00:48,00:34)",
-                "French": "No. 178,179,180 (00:42,00:00,00:32)",
-                "German": "No. 196,197,198 (01:00,00:59,00:44)",
-                "Greek": "No. 214,215,216 (00:48,00:47,00:40)",
-                "Hungarian": "No. 232,233,234 (00:56,00:56,00:44)",
-                "Italian": "No. 248,249,250 (00:43,00:42,00:36)",
-                "Latvian": "No. 266,267,268 (00:56,00:54,00:44)",
-                "Lithuanian": "No. 282,283,284 (00:45,00:44,00:34)",
-                "Maltese": "No. 298,299,300 (00:59,00:58,00:40)",
-                "Norwegian": "No. 314,315,316 (00:42,00:41,00:32)",
-                "Polish": "No. 330,331,332 (00:50,00:48,00:36)",
-                "Portuguese": "No. 348,349,350 (00:42,00:41,00:34)",
-                "Romanian": "No. 366,367,368 (00:48,00:47,00:36)",
-                "Spanish": "No. 382,383,384 (00:52,00:51,00:34)",
-                "Swedish": "No. 400,401,402 (00:34,00:53,00:42)",
-                "Ukrainian": "No. 416,417,418 (00:44,00:43,00:36)"
-            },
-            "OTS": {
-                "English": "No. 49,50 (00:28,00:15)",
-                "Dutch": "No. 163,164 (00:35,00:18)",
-                "French": "No. 181,182 (00:45,00:20)",
-                "German": "No. 199,200 (00:42,00:26)",
-                "Greek": "No. 217,218 (00:48,00:24)",
-                "Italian": "No. 251,252 (00:39,00:22)",
-                "Polish": "No. 333,334 (00:41,00:20)",
-                "Portuguese": "No. 351,352 (00:41,00:22)",
-                "Spanish": "No. 385,386 (00:42,00:22)"
-            },
-            "WELCOME_PRE_SAFETY": {
-                "English": "No. 63 (00:28)",
-                "Arabic": "No. 79 (00:36)",
-                "Bulgarian": "No. 95 (00:29)",
-                "Catalan": "No. 111 (00:28)",
-                "Croatian": "No. 127 (00:34)",
-                "Czech": "No. 143 (00:31)",
-                "Danish": "No. 159 (00:24)",
-                "Dutch": "No. 177 (00:26)",
-                "French": "No. 195 (00:30)",
-                "German": "No. 213 (00:30)",
-                "Greek": "No. 231 (00:27)",
-                "Hungarian": "No. 247 (00:34)",
-                "Italian": "No. 265 (00:34)",
-                "Latvian": "No. 281 (00:33)",
-                "Lithuanian": "No. 297 (00:29)",
-                "Maltese": "No. 313 (00:35)",
-                "Norwegian": "No. 329 (00:27)",
-                "Polish": "No. 347 (00:27)",
-                "Portuguese": "No. 365 (00:39)",
-                "Romanian": "No. 381 (00:25)",
-                "Spanish": "No. 399 (00:36)",
-                "Swedish": "No. 415 (00:29)",
-                "Ukrainian": "No. 431 (00:24)"
-            },
             "SAFETY_DEMO": {
                 "English": "No. 1 (03:21)",
                 "Arabic": "No. 2 (03:05)",
@@ -288,55 +258,124 @@
                 "Swedish": "No. 24 (02:53)",
                 "Ukrainian": "No. 25 (03:21)"
             },
-            "ONBOARD_SERVICE": {
-                "English": "No. 55 (00:30)",
-                "Arabic": "No. 71 (00:42)",
-                "Bulgarian": "No. 87 (00:29)",
-                "Catalan": "No. 103 (00:36)",
-                "Croatian": "No. 119 (00:31)",
-                "Czech": "No. 135 (00:33)",
-                "Danish": "No. 151 (00:27)",
-                "Dutch": "No. 169 (00:29)",
-                "French": "No. 187 (00:30)",
-                "German": "No. 205 (00:35)",
-                "Greek": "No. 223 (00:31)",
-                "Hungarian": "No. 239 (00:36)",
-                "Italian": "No. 257 (00:37)",
-                "Latvian": "No. 273 (00:37)",
-                "Lithuanian": "No. 289 (00:26)",
-                "Maltese": "No. 305 (00:36)",
-                "Norwegian": "No. 321 (00:31)",
-                "Polish": "No. 339 (00:30)",
-                "Portuguese": "No. 357 (00:41)",
-                "Romanian": "No. 373 (00:27)",
-                "Spanish": "No. 391 (00:41)",
-                "Swedish": "No. 407 (00:30)",
-                "Ukrainian": "No. 423 (00:26)"
+            "DISEMBARKATION": {
+                "English": "No. 26 (00:20)",
+                "Arabic": "No. 27 (00:25)",
+                "Bulgarian": "No. 28 (00:23)",
+                "Catalan": "No. 29 (00:17)",
+                "Croatian": "No. 30 (00:26)",
+                "Czech": "No. 31 (00:22)",
+                "French": "No. 32 (00:21)",
+                "German": "No. 33 (00:19)",
+                "Greek": "No. 34 (00:17)",
+                "Hungarian": "No. 35 (00:18)",
+                "Italian": "No. 36 (00:23)",
+                "Latvian": "No. 37 (00:22)",
+                "Lithuanian": "No. 38 (00:19)",
+                "Maltese": "No. 39 (00:29)",
+                "Polish": "No. 40 (00:26)",
+                "Portuguese": "No. 41 (00:25)",
+                "Romanian": "No. 42 (00:27)",
+                "Slovak": "No. 43 (00:15)",
+                "Spanish": "No. 44 (00:18)",
+                "Ukrainian": "No. 45 (00:22)"
             },
-            "GIFTS": {
-                "English": "No. 52 (00:18)",
-                "Arabic": "No. 68 (00:32)",
-                "Bulgarian": "No. 84 (00:23)",
-                "Catalan": "No. 100 (00:20)",
-                "Croatian": "No. 116 (00:25)",
-                "Czech": "No. 132 (00:25)",
-                "Danish": "No. 148 (00:19)",
-                "Dutch": "No. 166 (00:22)",
-                "French": "No. 184 (00:17)",
-                "German": "No. 202 (00:24)",
-                "Greek": "No. 220 (00:23)",
-                "Hungarian": "No. 236 (00:22)",
-                "Italian": "No. 254 (00:27)",
-                "Latvian": "No. 270 (00:23)",
-                "Lithuanian": "No. 286 (00:24)",
-                "Maltese": "No. 302 (00:24)",
-                "Norwegian": "No. 318 (00:21)",
-                "Polish": "No. 336 (00:21)",
-                "Portuguese": "No. 354 (00:28)",
-                "Romanian": "No. 370 (00:21)",
-                "Spanish": "No. 388 (00:31)",
-                "Swedish": "No. 404 (00:24)",
-                "Ukrainian": "No. 420 (00:22)"
+            "BOARDING_PILOT_MUSIC": {
+                "English": "No. 46 (00:32)",
+                "Arabic": "No. 64 (00:54)",
+                "Bulgarian": "No. 80 (00:47)",
+                "Catalan": "No. 96 (00:49)",
+                "Croatian": "No. 112 (00:50)",
+                "Czech": "No. 128 (00:53)",
+                "Danish": "No. 144 (00:29)",
+                "Dutch": "No. 160 (00:49)",
+                "French": "No. 178 (00:42)",
+                "German": "No. 196 (01:00)",
+                "Greek": "No. 214 (00:48)",
+                "Hungarian": "No. 232 (00:56)",
+                "Italian": "No. 248 (00:43)",
+                "Latvian": "No. 266 (00:56)",
+                "Lithuanian": "No. 282 (00:45)",
+                "Maltese": "No. 298 (00:59)",
+                "Norwegian": "No. 314 (00:42)",
+                "Polish": "No. 330 (00:50)",
+                "Portuguese": "No. 348 (00:42)",
+                "Romanian": "No. 366 (00:48)",
+                "Spanish": "No. 382 (00:52)",
+                "Swedish": "No. 400 (00:34)",
+                "Ukrainian": "No. 416 (00:44)"
+            },
+            "BOARDING_PILOT": {
+                "English": "No. 47 (00:32)",
+                "Arabic": "No. 65 (00:53)",
+                "Bulgarian": "No. 81 (00:46)",
+                "Catalan": "No. 97 (00:48)",
+                "Croatian": "No. 113 (00:50)",
+                "Czech": "No. 129 (00:52)",
+                "Danish": "No. 145 (00:38)",
+                "Dutch": "No. 161 (00:48)",
+                "French": "No. 179 (00:00)",
+                "German": "No. 197 (00:59)",
+                "Greek": "No. 215 (00:47)",
+                "Hungarian": "No. 233 (00:56)",
+                "Italian": "No. 249 (00:42)",
+                "Latvian": "No. 267 (00:54)",
+                "Lithuanian": "No. 283 (00:44)",
+                "Maltese": "No. 299 (00:58)",
+                "Norwegian": "No. 315 (00:41)",
+                "Polish": "No. 331 (00:48)",
+                "Portuguese": "No. 349 (00:41)",
+                "Romanian": "No. 367 (00:47)",
+                "Spanish": "No. 383 (00:51)",
+                "Swedish": "No. 401 (00:53)",
+                "Ukrainian": "No. 417 (00:43)"
+            },
+            "BOARDING_REM_PILOT": {
+                "English": "No. 48 (00:28)",
+                "Arabic": "No. 66 (00:44)",
+                "Bulgarian": "No. 82 (00:36)",
+                "Catalan": "No. 98 (00:34)",
+                "Croatian": "No. 114 (00:40)",
+                "Czech": "No. 130 (00:36)",
+                "Danish": "No. 146 (00:29)",
+                "Dutch": "No. 162 (00:34)",
+                "French": "No. 180 (00:32)",
+                "German": "No. 198 (00:44)",
+                "Greek": "No. 216 (00:40)",
+                "Hungarian": "No. 234 (00:44)",
+                "Italian": "No. 250 (00:36)",
+                "Latvian": "No. 268 (00:44)",
+                "Lithuanian": "No. 284 (00:34)",
+                "Maltese": "No. 300 (00:40)",
+                "Norwegian": "No. 316 (00:32)",
+                "Polish": "No. 332 (00:36)",
+                "Portuguese": "No. 350 (00:34)",
+                "Romanian": "No. 368 (00:36)",
+                "Spanish": "No. 384 (00:34)",
+                "Swedish": "No. 402 (00:42)",
+                "Ukrainian": "No. 418 (00:36)"
+            },
+            "OTS_OPEN": {
+                "English": "No. 49 (00:28)",
+                "Dutch": "No. 163 (00:35)",
+                "French": "No. 181 (00:45)",
+                "German": "No. 199 (00:42)",
+                "Greek": "No. 217 (00:48)",
+                "Italian": "No. 251 (00:39)",
+                "Polish": "No. 333 (00:41)",
+                "Portuguese": "No. 351 (00:41)",
+                "Spanish": "No. 385 (00:42)"
+            },
+            "OTS_CLOSED": {
+                "English": "No. 50 (00:15)",
+                "Dutch": "No. 164 (00:18)",
+                "French": "No. 182 (00:20)",
+                "German": "No. 200 (00:26)",
+                "Greek": "No. 218 (00:24)",
+                "Italian": "No. 252 (00:22)",
+                "Polish": "No. 334 (00:20)",
+                "Portuguese": "No. 352 (00:22)",
+                "Spanish": "No. 386 (00:22)"
             },
             "DUTYFREE": {
                 "English": "No. 51 (00:17)",
@@ -363,55 +402,30 @@
                 "Swedish": "No. 403 (00:23)",
                 "Ukrainian": "No. 419 (00:19)"
             },
-            "SCRATCHCARDS": {
-                "English": "No. 56,57,58,59,60,61 (00:22,00:17,00:21,00:32,00:26,00:29)",
-                "Arabic": "No. 72,73,74,75,76,77 (00:30,00:20,00:31,00:48,00:34,00:43)",
-                "Bulgarian": "No. 88,89,90,91,92,93 (00:24,00:19,00:28,00:41,00:32,00:37)",
-                "Catalan": "No. 104,105,106,107,108,109 (00:27,00:17,00:28,00:37,00:32,00:35)",
-                "Croatian": "No. 120,121,122,123,124,125 (00:29,35,00:26,00:44,00:34,00:39)",
-                "Czech": "No. 136,137,138,139,140,141 (00:25,00:20,00:28,00:42,00:29,00:36)",
-                "Danish": "No. 152,153,154,155,156,157 (00:22,00:17,00:24,00:40,00:27,00:34)",
-                "Dutch": "No. 170,171,172,173,174,175 (00:22,00:14,00:23,00:36,00:27,00:32)",
-                "French": "No. 188,189,190,191,192,193 (00:25,00:16,00:18,00:35,00:25,00:31)",
-                "German": "No. 206,207,208,209,210,211 (00:27,00:19,00:24,00:42,00:31,00:38)",
-                "Greek": "No. 224,225,226,227,228,229 (00:31,00:22,00:27,00:42,00:34,00:37)",
-                "Hungarian": "No. 240,241,242,243,244,245 (00:32,00:22,00:26,00:41,00:33,00:44)",
-                "Italian": "No. 258,259,260,261,262,263 (00:23,00:17,00:27,00:41,00:35,00:38)",
-                "Latvian": "No. 274,275,276,277,278,279 (00:25,00:17,00:26,00:41,00:31,00:41)",
-                "Lithuanian": "No. 290,291,292,293,294,295 (00:25,00:18,00:22,00:37,00:27,00:37)",
-                "Maltese": "No. 306,307,308,309,310,311 (00:28,00:22,00:26,00:41,00:33,00:39)",
-                "Norwegian": "No. 322,323,324,325,326,327 (00:24,00:20,00:25,00:39,00:33,00:36)",
-                "Polish": "No. 340,341,342,343,344,345 (00:20,00:19,00:22,00:37,00:28,00:32)",
-                "Portuguese": "No. 358,359,360,361,362,363 (00:27,00:22,00:28,00:38,00:35,00:36)",
-                "Romanian": "No. 374,375,376,377,378,379 (00:28,00:20,00:27,00:41,00:36,00:41)",
-                "Spanish": "No. 392,393,394,395,396,397 (00:25,00:18,00:25,00:36,00:30,00:35)",
-                "Swedish": "No. 408,409,410,411,412,413 (00:25,00:20,00:27,00:45,00:35,00:37)",
-                "Ukrainian": "No. 424,425,426,427,428,429 (00:22,00:13,00:23,00:30,00:23,00:24)"
-            },
-            "TURBULENCE": {
-                "English": "No. 62 (00:15)",
-                "Arabic": "No. 78 (00:21)",
-                "Bulgarian": "No. 94 (00:17)",
-                "Catalan": "No. 110 (00:17)",
-                "Croatian": "No. 126 (00:18)",
-                "Czech": "No. 142 (00:17)",
-                "Danish": "No. 158 (00:15)",
-                "Dutch": "No. 176 (00:15)",
-                "French": "No. 194 (00:16)",
-                "German": "No. 212 (00:20)",
-                "Greek": "No. 230 (00:18)",
-                "Hungarian": "No. 246 (00:18)",
-                "Italian": "No. 264 (00:25)",
-                "Latvian": "No. 280 (00:18)",
-                "Lithuanian": "No. 296 (00:17)",
-                "Maltese": "No. 312 (00:24)",
-                "Norwegian": "No. 328 (00:17)",
-                "Polish": "No. 346 (00:13)",
-                "Portuguese": "No. 364 (00:27)",
-                "Romanian": "No. 380 (00:18)",
-                "Spanish": "No. 398 (00:24)",
-                "Swedish": "No. 414 (00:18)",
-                "Ukrainian": "No. 430 (00:23)"
+            "GIFTS": {
+                "English": "No. 52 (00:18)",
+                "Arabic": "No. 68 (00:32)",
+                "Bulgarian": "No. 84 (00:23)",
+                "Catalan": "No. 100 (00:20)",
+                "Croatian": "No. 116 (00:25)",
+                "Czech": "No. 132 (00:25)",
+                "Danish": "No. 148 (00:19)",
+                "Dutch": "No. 166 (00:22)",
+                "French": "No. 184 (00:17)",
+                "German": "No. 202 (00:24)",
+                "Greek": "No. 220 (00:23)",
+                "Hungarian": "No. 236 (00:22)",
+                "Italian": "No. 254 (00:27)",
+                "Latvian": "No. 270 (00:23)",
+                "Lithuanian": "No. 286 (00:24)",
+                "Maltese": "No. 302 (00:24)",
+                "Norwegian": "No. 318 (00:21)",
+                "Polish": "No. 336 (00:21)",
+                "Portuguese": "No. 354 (00:28)",
+                "Romanian": "No. 370 (00:21)",
+                "Spanish": "No. 388 (00:31)",
+                "Swedish": "No. 404 (00:24)",
+                "Ukrainian": "No. 420 (00:22)"
             },
             "LANDED_NOT_ON_TIME": {
                 "English": "No. 53 (00:15)",
@@ -463,40 +477,272 @@
                 "Swedish": "No. 406 (00:25)",
                 "Ukrainian": "No. 422 (00:18)"
             },
-            "DISEMBARKATION": {
-                "English": "No. 26 (00:20)",
-                "Arabic": "No. 27 (00:25)",
-                "Bulgarian": "No. 28 (00:23)",
-                "Catalan": "No. 29 (00:17)",
-                "Croatian": "No. 30 (00:26)",
-                "Czech": "No. 31 (00:22)",
-                "French": "No. 32 (00:21)",
-                "German": "No. 33 (00:19)",
-                "Greek": "No. 34 (00:17)",
-                "Hungarian": "No. 35 (00:18)",
-                "Italian": "No. 36 (00:23)",
-                "Latvian": "No. 37 (00:22)",
-                "Lithuanian": "No. 38 (00:19)",
-                "Maltese": "No. 39 (00:29)",
-                "Polish": "No. 40 (00:26)",
-                "Portuguese": "No. 41 (00:25)",
-                "Romanian": "No. 42 (00:27)",
-                "Slovak": "No. 43 (00:15)",
-                "Spanish": "No. 44 (00:18)",
-                "Ukrainian": "No. 45 (00:22)"
+            "ONBOARD_SERVICE": {
+                "English": "No. 55 (00:30)",
+                "Arabic": "No. 71 (00:42)",
+                "Bulgarian": "No. 87 (00:29)",
+                "Catalan": "No. 103 (00:36)",
+                "Croatian": "No. 119 (00:31)",
+                "Czech": "No. 135 (00:33)",
+                "Danish": "No. 151 (00:27)",
+                "Dutch": "No. 169 (00:29)",
+                "French": "No. 187 (00:30)",
+                "German": "No. 205 (00:35)",
+                "Greek": "No. 223 (00:31)",
+                "Hungarian": "No. 239 (00:36)",
+                "Italian": "No. 257 (00:37)",
+                "Latvian": "No. 273 (00:37)",
+                "Lithuanian": "No. 289 (00:26)",
+                "Maltese": "No. 305 (00:36)",
+                "Norwegian": "No. 321 (00:31)",
+                "Polish": "No. 339 (00:30)",
+                "Portuguese": "No. 357 (00:41)",
+                "Romanian": "No. 373 (00:27)",
+                "Spanish": "No. 391 (00:41)",
+                "Swedish": "No. 407 (00:30)",
+                "Ukrainian": "No. 423 (00:26)"
+            },
+            "SCRATCHCARDS": {
+                "English": "No. 56 (00:22)",
+                "Arabic": "No. 72 (00:30)",
+                "Bulgarian": "No. 88 (00:24)",
+                "Catalan": "No. 104 (00:27)",
+                "Croatian": "No. 120 (00:29)",
+                "Czech": "No. 136 (00:25)",
+                "Danish": "No. 152 (00:22)",
+                "Dutch": "No. 170 (00:22)",
+                "French": "No. 188 (00:25)",
+                "German": "No. 206 (00:27)",
+                "Greek": "No. 224 (00:31)",
+                "Hungarian": "No. 240 (00:32)",
+                "Italian": "No. 258 (00:23)",
+                "Latvian": "No. 274 (00:25)",
+                "Lithuanian": "No. 290 (00:25)",
+                "Maltese": "No. 306 (00:28)",
+                "Norwegian": "No. 322 (00:24)",
+                "Polish": "No. 340 (00:20)",
+                "Portuguese": "No. 358 (00:27)",
+                "Romanian": "No. 374 (00:28)",
+                "Spanish": "No. 392 (00:25)",
+                "Swedish": "No. 408 (00:25)",
+                "Ukrainian": "No. 424 (00:22)"
+            },
+            "SCRATCHCARDS_IRELAND": {
+                "English": "No. 57 (00:17)",
+                "Arabic": "No. 73 (00:20)",
+                "Bulgarian": "No. 89 (00:19)",
+                "Catalan": "No. 105 (00:17)",
+                "Croatian": "No. 121 (00:20)",
+                "Czech": "No. 137 (00:20)",
+                "Danish": "No. 153 (00:17)",
+                "Dutch": "No. 171 (00:14)",
+                "French": "No. 189 (00:16)",
+                "German": "No. 207 (00:19)",
+                "Greek": "No. 225 (00:22)",
+                "Hungarian": "No. 241 (00:22)",
+                "Italian": "No. 259 (00:17)",
+                "Latvian": "No. 275 (00:17)",
+                "Lithuanian": "No. 291 (00:18)",
+                "Maltese": "No. 307 (00:22)",
+                "Norwegian": "No. 323 (00:20)",
+                "Polish": "No. 341 (00:19)",
+                "Portuguese": "No. 359 (00:22)",
+                "Romanian": "No. 375 (00:20)",
+                "Spanish": "No. 393 (00:18)",
+                "Swedish": "No. 409 (00:20)",
+                "Ukrainian": "No. 425 (00:13)"
+            },
+            "SCRATCHCARDS_ITALY": {
+                "English": "No. 58 (00:21)",
+                "Arabic": "No. 74 (00:31)",
+                "Bulgarian": "No. 90 (00:28)",
+                "Catalan": "No. 106 (00:28)",
+                "Croatian": "No. 122 (00:26)",
+                "Czech": "No. 138 (00:28)",
+                "Danish": "No. 154 (00:24)",
+                "Dutch": "No. 172 (00:23)",
+                "French": "No. 190 (00:18)",
+                "German": "No. 208 (00:24)",
+                "Greek": "No. 226 (00:27)",
+                "Hungarian": "No. 242 (00:26)",
+                "Italian": "No. 260 (00:27)",
+                "Latvian": "No. 276 (00:26)",
+                "Lithuanian": "No. 292 (00:22)",
+                "Maltese": "No. 308 (00:26)",
+                "Norwegian": "No. 324 (00:25)",
+                "Polish": "No. 342 (00:22)",
+                "Portuguese": "No. 360 (00:28)",
+                "Romanian": "No. 376 (00:27)",
+                "Spanish": "No. 394 (00:25)",
+                "Swedish": "No. 410 (00:27)",
+                "Ukrainian": "No. 426 (00:23)"
+            },
+            "SCRATCHCARDS_PORTUGAL": {
+                "English": "No. 59 (00:32)",
+                "Arabic": "No. 75 (00:48)",
+                "Bulgarian": "No. 91 (00:41)",
+                "Catalan": "No. 107 (00:37)",
+                "Croatian": "No. 123 (00:44)",
+                "Czech": "No. 139 (00:42)",
+                "Danish": "No. 155 (00:40)",
+                "Dutch": "No. 173 (00:36)",
+                "French": "No. 191 (00:35)",
+                "German": "No. 209 (00:42)",
+                "Greek": "No. 227 (00:42)",
+                "Hungarian": "No. 243 (00:41)",
+                "Italian": "No. 261 (00:41)",
+                "Latvian": "No. 277 (00:41)",
+                "Lithuanian": "No. 293 (00:37)",
+                "Maltese": "No. 309 (00:41)",
+                "Norwegian": "No. 325 (00:39)",
+                "Polish": "No. 343 (00:37)",
+                "Portuguese": "No. 361 (00:38)",
+                "Romanian": "No. 377 (00:41)",
+                "Spanish": "No. 395 (00:36)",
+                "Swedish": "No. 411 (00:45)",
+                "Ukrainian": "No. 427 (00:30)"
+            },
+            "SCRATCHCARDS_SPAIN": {
+                "English": "No. 60 (00:26)",
+                "Arabic": "No. 76 (00:34)",
+                "Bulgarian": "No. 92 (00:32)",
+                "Catalan": "No. 108 (00:32)",
+                "Croatian": "No. 124 (00:34)",
+                "Czech": "No. 140 (00:29)",
+                "Danish": "No. 156 (00:27)",
+                "Dutch": "No. 174 (00:27)",
+                "French": "No. 192 (00:25)",
+                "German": "No. 210 (00:31)",
+                "Greek": "No. 228 (00:34)",
+                "Hungarian": "No. 244 (00:33)",
+                "Italian": "No. 262 (00:35)",
+                "Latvian": "No. 278 (00:31)",
+                "Lithuanian": "No. 294 (00:27)",
+                "Maltese": "No. 310 (00:33)",
+                "Norwegian": "No. 326 (00:33)",
+                "Polish": "No. 344 (00:28)",
+                "Portuguese": "No. 362 (00:35)",
+                "Romanian": "No. 378 (00:36)",
+                "Spanish": "No. 396 (00:30)",
+                "Swedish": "No. 412 (00:35)",
+                "Ukrainian": "No. 428 (00:23)"
+            },
+            "SCRATCHCARDS_UK": {
+                "English": "No. 61 (00:29)",
+                "Arabic": "No. 77 (00:43)",
+                "Bulgarian": "No. 93 (00:37)",
+                "Catalan": "No. 109 (00:35)",
+                "Croatian": "No. 125 (00:39)",
+                "Czech": "No. 141 (00:36)",
+                "Danish": "No. 157 (00:34)",
+                "Dutch": "No. 175 (00:32)",
+                "French": "No. 193 (00:31)",
+                "German": "No. 211 (00:38)",
+                "Greek": "No. 229 (00:37)",
+                "Hungarian": "No. 245 (00:44)",
+                "Italian": "No. 263 (00:38)",
+                "Latvian": "No. 279 (00:41)",
+                "Lithuanian": "No. 295 (00:37)",
+                "Maltese": "No. 311 (00:39)",
+                "Norwegian": "No. 327 (00:36)",
+                "Polish": "No. 345 (00:32)",
+                "Portuguese": "No. 363 (00:36)",
+                "Romanian": "No. 379 (00:41)",
+                "Spanish": "No. 397 (00:35)",
+                "Swedish": "No. 413 (00:37)",
+                "Ukrainian": "No. 429 (00:24)"
+            },
+            "TURBULENCE": {
+                "English": "No. 62 (00:15)",
+                "Arabic": "No. 78 (00:21)",
+                "Bulgarian": "No. 94 (00:17)",
+                "Catalan": "No. 110 (00:17)",
+                "Croatian": "No. 126 (00:18)",
+                "Czech": "No. 142 (00:17)",
+                "Danish": "No. 158 (00:15)",
+                "Dutch": "No. 176 (00:15)",
+                "French": "No. 194 (00:16)",
+                "German": "No. 212 (00:20)",
+                "Greek": "No. 230 (00:18)",
+                "Hungarian": "No. 246 (00:18)",
+                "Italian": "No. 264 (00:25)",
+                "Latvian": "No. 280 (00:18)",
+                "Lithuanian": "No. 296 (00:17)",
+                "Maltese": "No. 312 (00:24)",
+                "Norwegian": "No. 328 (00:17)",
+                "Polish": "No. 346 (00:13)",
+                "Portuguese": "No. 364 (00:27)",
+                "Romanian": "No. 380 (00:18)",
+                "Spanish": "No. 398 (00:24)",
+                "Swedish": "No. 414 (00:18)",
+                "Ukrainian": "No. 430 (00:23)"
+            },
+            "WELCOME_PRE_SAFETY": {
+                "English": "No. 63 (00:28)",
+                "Arabic": "No. 79 (00:36)",
+                "Bulgarian": "No. 95 (00:29)",
+                "Catalan": "No. 111 (00:28)",
+                "Croatian": "No. 127 (00:34)",
+                "Czech": "No. 143 (00:31)",
+                "Danish": "No. 159 (00:24)",
+                "Dutch": "No. 177 (00:26)",
+                "French": "No. 195 (00:30)",
+                "German": "No. 213 (00:30)",
+                "Greek": "No. 231 (00:27)",
+                "Hungarian": "No. 247 (00:34)",
+                "Italian": "No. 265 (00:34)",
+                "Latvian": "No. 281 (00:33)",
+                "Lithuanian": "No. 297 (00:29)",
+                "Maltese": "No. 313 (00:35)",
+                "Norwegian": "No. 329 (00:27)",
+                "Polish": "No. 347 (00:27)",
+                "Portuguese": "No. 365 (00:39)",
+                "Romanian": "No. 381 (00:25)",
+                "Spanish": "No. 399 (00:36)",
+                "Swedish": "No. 415 (00:29)",
+                "Ukrainian": "No. 431 (00:24)"
             }
         };
+
+        const announcementGroups = {
+            "BOARDING": ["BOARDING_PILOT_MUSIC", "BOARDING_PILOT", "BOARDING_REM_PILOT"],
+            "OTS": ["OTS_OPEN", "OTS_CLOSED"],
+            "SCRATCHCARDS": ["SCRATCHCARDS", "SCRATCHCARDS_IRELAND", "SCRATCHCARDS_ITALY", "SCRATCHCARDS_PORTUGAL", "SCRATCHCARDS_SPAIN", "SCRATCHCARDS_UK"]
+        };
+
+        // Cargar selecciones al iniciar
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedAnnouncements = JSON.parse(localStorage.getItem('selectedAnnouncements') || '[]');
+            const savedLanguages = JSON.parse(localStorage.getItem('selectedLanguages') || '[]');
+            document.querySelectorAll('input[name="announcement"]').forEach(cb => {
+                cb.checked = savedAnnouncements.includes(cb.value);
+            });
+            document.querySelectorAll('input[name="language"]').forEach(cb => {
+                cb.checked = savedLanguages.includes(cb.value);
+            });
+            updateCounts();
+        });
 
         document.getElementById('select-all-announcements').addEventListener('change', function() {
             const checkboxes = document.querySelectorAll('input[name="announcement"]');
             checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+            saveSelections();
             updateCounts();
         });
 
         document.getElementById('select-all-languages').addEventListener('change', function() {
             const checkboxes = document.querySelectorAll('input[name="language"]');
             checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+            saveSelections();
             updateCounts();
+        });
+
+        document.getElementById('language-search').addEventListener('input', function(e) {
+            const search = e.target.value.toLowerCase();
+            document.querySelectorAll('#languages label').forEach(label => {
+                const lang = label.textContent.toLowerCase();
+                label.style.display = lang.includes(search) ? 'block' : 'none';
+            });
         });
 
         function updateCounts() {
@@ -505,6 +751,20 @@
             document.getElementById('announcement-count').textContent = selectedAnnouncements;
             document.getElementById('language-count').textContent = selectedLanguages;
             document.getElementById('total-items').textContent = selectedAnnouncements * selectedLanguages;
+        }
+
+        function saveSelections() {
+            const selectedAnnouncements = Array.from(document.querySelectorAll('input[name="announcement"]:checked')).map(cb => cb.value);
+            const selectedLanguages = Array.from(document.querySelectorAll('input[name="language"]:checked')).map(cb => cb.value);
+            localStorage.setItem('selectedAnnouncements', JSON.stringify(selectedAnnouncements));
+            localStorage.setItem('selectedLanguages', JSON.stringify(selectedLanguages));
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            setTimeout(() => notification.style.display = 'none', 2000);
         }
 
         function generateTable() {
@@ -520,9 +780,8 @@
             // Determinar los idiomas a mostrar
             let languagesToShow = [];
             if (selectedLanguages.length === 0) {
-                languagesToShow = ['English']; // Por defecto, solo inglés si no se selecciona nada
+                languagesToShow = ['English'];
             } else {
-                // Asegurarse de que el inglés esté siempre presente, y añadir los idiomas seleccionados
                 languagesToShow = ['English'];
                 selectedLanguages.forEach(lang => {
                     if (lang !== 'English' && !languagesToShow.includes(lang)) {
@@ -539,7 +798,16 @@
             });
 
             // Generar las filas de la tabla
+            const allAnnouncements = [];
             selectedAnnouncements.forEach(announcement => {
+                if (announcementGroups[announcement]) {
+                    allAnnouncements.push(...announcementGroups[announcement]);
+                } else {
+                    allAnnouncements.push(announcement);
+                }
+            });
+
+            allAnnouncements.forEach(announcement => {
                 if (pramData[announcement]) {
                     const row = document.createElement('tr');
                     let cells = `<td>${announcement.replace(/_/g, ' ')}</td>`;
@@ -552,14 +820,51 @@
             });
 
             updateCounts();
+            showNotification('Table generated successfully!');
+        }
+
+        function exportToCSV() {
+            const selectedAnnouncements = Array.from(document.querySelectorAll('input[name="announcement"]:checked')).map(input => input.value);
+            const selectedLanguages = Array.from(document.querySelectorAll('input[name="language"]:checked')).map(input => input.value);
+            const allAnnouncements = [];
+            selectedAnnouncements.forEach(announcement => {
+                if (announcementGroups[announcement]) {
+                    allAnnouncements.push(...announcementGroups[announcement]);
+                } else {
+                    allAnnouncements.push(announcement);
+                }
+            });
+
+            let csv = 'Announcement,' + (selectedLanguages.length ? selectedLanguages.join(',') : 'English') + '\n';
+            allAnnouncements.forEach(announcement => {
+                let row = [announcement.replace(/_/g, ' ')];
+                (selectedLanguages.length ? selectedLanguages : ['English']).forEach(lang => {
+                    row.push(pramData[announcement][lang] || '-');
+                });
+                csv += row.join(',') + '\n';
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'pram-announcements.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+            showNotification('Exported to CSV!');
         }
 
         function resetSelections() {
             document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => checkbox.checked = false);
+            document.getElementById('language-search').value = '';
+            document.querySelectorAll('#languages label').forEach(label => label.style.display = 'block');
             document.getElementById('results-table-body').innerHTML = '';
             const thead = document.getElementById('results-table-head');
             thead.innerHTML = '<tr><th>Records</th></tr>';
+            localStorage.removeItem('selectedAnnouncements');
+            localStorage.removeItem('selectedLanguages');
             updateCounts();
+            showNotification('Selections reset!');
         }
 
         document.querySelectorAll('button, input').forEach(element => {
@@ -572,13 +877,14 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js').then(reg => {
                 console.log('Service Worker registered', reg);
-            }).catch(err => {
-                console.log('Service Worker registration failed', err);
-            });
+            }).catch(err => console.log('Service Worker registration failed', err));
         }
 
         document.querySelectorAll('input[name="announcement"], input[name="language"]').forEach(checkbox => {
-            checkbox.addEventListener('change', updateCounts);
+            checkbox.addEventListener('change', () => {
+                saveSelections();
+                updateCounts();
+            });
         });
     </script>
 </body>
