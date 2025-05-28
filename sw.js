@@ -5,6 +5,7 @@ self.addEventListener('install', event => {
                 './index.html',
                 './icon.png',
                 './icon-180.png'
+                './favicon-32.png'
             ]);
         })
     );
