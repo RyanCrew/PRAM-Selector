@@ -3,7 +3,8 @@ self.addEventListener('install', event => {
         caches.open('pram-selector-v1').then(cache => {
             return cache.addAll([
                 './index.html',
-                './icon.png'
+                './icon.png',
+                './icon-180.png'
             ]);
         })
     );
