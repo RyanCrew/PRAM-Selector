@@ -212,7 +212,6 @@
                 <label><input type="checkbox" name="language" value="Ukrainian"> Ukrainian</label>
             </div>
 
-            <button onclick="generateTable()">Generate Table</button>
             <button onclick="resetSelections()">Reset All Selections</button>
         </div>
 
@@ -226,7 +225,7 @@
                     <thead id="results-table-head">
                         <tr>
                             <th>Records</th>
-                            <!-- Las columnas de idiomas se generarán dinámicamente -->
+                            <!-- Language columns will be generated dynamically -->
                         </tr>
                     </thead>
                     <tbody id="results-table-body"></tbody>
@@ -718,7 +717,7 @@
             "SCRATCHCARDS": ["SCRATCHCARDS", "SCRATCHCARDS_IRELAND", "SCRATCHCARDS_ITALY", "SCRATCHCARDS_PORTUGAL", "SCRATCHCARDS_SPAIN", "SCRATCHCARDS_UK"]
         };
 
-        // Cargar selecciones al iniciar
+        // Load selections on page load
         document.addEventListener('DOMContentLoaded', () => {
             const savedAnnouncements = JSON.parse(localStorage.getItem('selectedAnnouncements') || '[]');
             const savedLanguages = JSON.parse(localStorage.getItem('selectedLanguages') || '[]');
@@ -729,22 +728,28 @@
                 cb.checked = savedLanguages.includes(cb.value);
             });
             updateCounts();
+            generateTable(); // Generate table on load if there are saved selections
         });
 
+        // Handle "Select All" for announcements
         document.getElementById('select-all-announcements').addEventListener('change', function() {
             const checkboxes = document.querySelectorAll('input[name="announcement"]');
             checkboxes.forEach(checkbox => checkbox.checked = this.checked);
             saveSelections();
             updateCounts();
+            generateTable();
         });
 
+        // Handle "Select All" for languages
         document.getElementById('select-all-languages').addEventListener('change', function() {
             const checkboxes = document.querySelectorAll('input[name="language"]');
             checkboxes.forEach(checkbox => checkbox.checked = this.checked);
             saveSelections();
             updateCounts();
+            generateTable();
         });
 
+        // Handle language search
         document.getElementById('language-search').addEventListener('input', function(e) {
             const search = e.target.value.toLowerCase();
             document.querySelectorAll('#languages label').forEach(label => {
@@ -753,10 +758,12 @@
             });
         });
 
+        // Ensure search input focuses on touch
         document.getElementById('language-search').addEventListener('touchstart', function(e) {
             this.focus();
         });
 
+        // Update counts for selected announcements and languages
         function updateCounts() {
             const selectedAnnouncements = document.querySelectorAll('input[name="announcement"]:checked').length;
             const selectedLanguages = document.querySelectorAll('input[name="language"]:checked').length;
@@ -765,6 +772,7 @@
             document.getElementById('total-items').textContent = selectedAnnouncements * selectedLanguages;
         }
 
+        // Save selections to localStorage
         function saveSelections() {
             const selectedAnnouncements = Array.from(document.querySelectorAll('input[name="announcement"]:checked')).map(cb => cb.value);
             const selectedLanguages = Array.from(document.querySelectorAll('input[name="language"]:checked')).map(cb => cb.value);
@@ -772,6 +780,7 @@
             localStorage.setItem('selectedLanguages', JSON.stringify(selectedLanguages));
         }
 
+        // Show notification
         function showNotification(message) {
             const notification = document.getElementById('notification');
             notification.textContent = message;
@@ -779,17 +788,18 @@
             setTimeout(() => notification.style.display = 'none', 3000);
         }
 
+        // Generate table based on selected announcements and languages
         function generateTable() {
             const selectedAnnouncements = Array.from(document.querySelectorAll('input[name="announcement"]:checked')).map(input => input.value);
             const selectedLanguages = Array.from(document.querySelectorAll('input[name="language"]:checked')).map(input => input.value);
             const thead = document.getElementById('results-table-head');
             const tbody = document.getElementById('results-table-body');
 
-            // Reiniciar la tabla
+            // Reset table
             thead.innerHTML = '<tr><th>Records</th></tr>';
             tbody.innerHTML = '';
 
-            // Determinar los idiomas a mostrar
+            // Determine languages to show
             let languagesToShow = [];
             if (selectedLanguages.length === 0) {
                 languagesToShow = ['English'];
@@ -805,14 +815,14 @@
                 });
             }
 
-            // Crear las columnas de la tabla
+            // Create table columns
             languagesToShow.forEach(lang => {
                 const th = document.createElement('th');
                 th.innerHTML = lang;
                 thead.querySelector('tr').appendChild(th);
             });
 
-            // Generar las filas de la tabla
+            // Generate table rows
             const allAnnouncements = [];
             selectedAnnouncements.forEach(announcement => {
                 if (announcementGroups[announcement]) {
@@ -835,9 +845,10 @@
             });
 
             updateCounts();
-            showNotification('Table generated successfully!');
+            showNotification('Table updated!');
         }
 
+        // Reset all selections and table
         function resetSelections() {
             document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => checkbox.checked = false);
             document.getElementById('language-search').value = '';
@@ -851,23 +862,27 @@
             showNotification('Selections reset!');
         }
 
-        document.querySelectorAll('button, input').forEach(element => {
-            element.addEventListener('touchstart', function(e) {
+        // Handle touch events for buttons
+        document.querySelectorAll('button').forEach(element => {
+            element.addEventListener('touchend', function(e) {
                 e.preventDefault();
                 this.click();
             });
         });
 
+        // Register service worker
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js').then(reg => {
                 console.log('Service Worker registered', reg);
             }).catch(err => console.log('Service Worker registration failed', err));
         }
 
+        // Update table on individual checkbox changes
         document.querySelectorAll('input[name="announcement"], input[name="language"]').forEach(checkbox => {
             checkbox.addEventListener('change', () => {
                 saveSelections();
                 updateCounts();
+                generateTable();
             });
         });
     </script>
