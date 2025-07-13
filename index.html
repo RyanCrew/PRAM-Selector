@@ -809,63 +809,66 @@ System: op: 20px;
 
         // Generate table based on selected announcements and languages
         function generateTable() {
-            const selectedAnnouncements = Array.from(document.querySelectorAll('input[name="announcement"]:checked')).map(input => input.value);
-            const selectedLanguages = Array.from(document.querySelectorAll('input[name="language"]:checked')).map(input => input.value);
-            const thead = document.getElementById('results-table-head');
-            const tbody = document.getElementById('results-table-body');
+    const selectedAnnouncements = Array.from(document.querySelectorAll('input[name="announcement"]:checked')).map(input => input.value);
+    const selectedLanguages = Array.from(document.querySelectorAll('input[name="language"]:checked')).map(input => input.value);
+    const thead = document.getElementById('results-table-head');
+    const tbody = document.getElementById('results-table-body');
 
-            // Reset table
-            thead.innerHTML = '<tr><th>Records</th></tr>';
-            tbody.innerHTML = '';
+    // Reset table
+    thead.innerHTML = '<tr><th>Records</th></tr>';
+    tbody.innerHTML = '';
 
-            // Determine languages to show
-            let languagesToShow = [];
-            if (selectedLanguages.length === 0) {
-                languagesToShow = ['English'];
-            } else {
-                languagesToShow = ['English'];
-                if (selectedLanguages.includes('Spanish') && !languagesToShow.includes('Spanish')) {
-                    languagesToShow.push('Spanish');
-                }
-                selectedLanguages.forEach(lang => {
-                    if (lang !== 'English' && lang !== 'Spanish' && !languagesToShow.includes(lang)) {
-                        languagesToShow.push(lang);
-                    }
-                });
-            }
-
-            // Create table columns
-            languagesToShow.forEach(lang => {
-                const th = document.createElement('th');
-                th.innerHTML = lang;
-                thead.querySelector('tr').appendChild(th);
-            });
-
-            // Generate table rows
-            const allAnnouncements = [];
-            selectedAnnouncements.forEach(announcement => {
-                if (announcementGroups[announcement]) {
-                    allAnnouncements.push(...announcementGroups[announcement]);
-                } else {
-                    allAnnouncements.push(announcement);
-                }
-            });
-
-            allAnnouncements.forEach(announcement => {
-                if (pramData[announcement]) {
-                    const row = document.createElement('tr');
-                    let cells = `<td>${announcement.replace(/_/g, ' ')}</td>`;
-                    languagesToShow.forEach(lang => {
-                        cells += `<td>${pramData[announcement][lang] || '-'}</td>`;
-                    });
-                    row.innerHTML = cells;
-                    tbody.appendChild(row);
-                }
-            });
-
-            updateCounts();
-            showNotification('Table updated!');
+    // Determine languages to show
+    let languagesToShow = [];
+    if (selectedLanguages.length === 0) {
+        languagesToShow = ['English'];
+    } else {
+        languagesToShow = ['English'];
+        if (selectedLanguages.includes('Spanish') && !languagesToShow.includes('Spanish')) {
+            languagesToShow.push('Spanish');
         }
+        selectedLanguages.forEach(lang => {
+            if (lang !== 'English' && lang !== 'Spanish' && !languagesToShow.includes(lang)) {
+                languagesToShow.push(lang);
+            }
+        });
+    }
+
+    // Create table columns
+    languagesToShow.forEach(lang => {
+        const th = document.createElement('th');
+        th.innerHTML = lang;
+        thead.querySelector('tr').appendChild(th);
+    });
+
+    // Generate table rows
+    const allAnnouncements = [];
+    selectedAnnouncements.forEach(announcement => {
+        if (announcementGroups[announcement]) {
+            allAnnouncements.push(...announcementGroups[announcement]);
+        } else {
+            allAnnouncements.push(announcement);
+        }
+    });
+
+    allAnnouncements.forEach(announcement => {
+        if (pramData[announcement]) {
+            const row = document.createElement('tr');
+            let cells = `<td>${announcement.replace(/_/g, ' ')}</td>`;
+            languagesToShow.forEach(lang => {
+                const value = pramData[announcement][lang] || '-';
+                // Eliminar el tiempo entre paréntesis
+                const cleanValue = value.replace(/\s*\([^)]+\)/, '').trim();
+                cells += `<td>${cleanValue}</td>`;
+            });
+            row.innerHTML = cells;
+            tbody.appendChild(row);
+        }
+    });
+
+    updateCounts();
+    showNotification('Table updated!');
+}
 
         // Reset all selections and table
         function resetSelections() {
